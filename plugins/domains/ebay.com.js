@@ -2,10 +2,10 @@ import log from '../../logging.js';
 export { log };
   
 export default {
-  // re: [
-  //   /^(https):\/\/[www.]{0,}ebay.com\/itm\/[0-9]{5,}/,
-  //   /^(https):\/\/[www.]{0,}ebay.com\/p\/[0-9]{5,}/i
-  // ],
+  re: [
+    /^(https):\/\/[www.]{0,}ebay.com\/itm\/[0-9]{5,}/i,
+    /^(https):\/\/[www.]{0,}ebay.com\/p\/[0-9]{5,}/i
+  ],
 
   lowestPriority: true,
 

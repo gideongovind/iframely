@@ -11,10 +11,6 @@ export default {
   mixins: [
     "favicon",
     "canonical",
-    "og-description",
-    "og-title",
-    "og-site",
-    "og-url"
   ],
 
   getMeta: function (cheerio, request, url, cb) {
@@ -38,6 +34,8 @@ export default {
             return cb(null);
           } else {
             let $ = cheerio.load(body);
+            var description = $('meta[name="description"]').attr('content');
+            var title = $("title").text();
             $('script[type="application/ld+json"]').each(function (i, elem) {
               let json = elem.children[0].data;
               if (json && json.includes('"@type":"Product"')) {
@@ -45,10 +43,12 @@ export default {
                 let price = JSON.parse(json).offers.price;
                 let canonical = JSON.parse(json).url;
                 return cb(null, {
+                  title: title,
+                  description: description,
+                  canonical: canonical,
                   price: price,
-                  canonical: canonical
                 });
-              }
+              } 
             });
           }
         }
